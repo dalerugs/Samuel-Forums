@@ -45,3 +45,7 @@ body{
 .bold{
 	font-weight: bold;
 }
+
+.btn-100{
+	width: 90px
+}

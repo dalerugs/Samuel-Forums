@@ -6,7 +6,7 @@
  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<!-- <link rel="icon" href="<?php echo base_url(); ?>/favicon.ico" type="image/gif"> -->
+	<link rel="icon" href="<?php echo base_url(); ?>/favicon.ico" type="image/gif">
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/sticky-footer.css">
@@ -31,8 +31,8 @@
 <nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-      <img src="" alt="Samuel Logo">
+      <a class="navbar-brand" href="<?php echo base_url();?>">
+      <img src="" alt="S A M U E L &nbsp; F O R U M S">
       </a>
     </div>
     <ul class="nav navbar-nav navbar-right">

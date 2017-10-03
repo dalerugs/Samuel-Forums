@@ -3,12 +3,15 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-10">
 						<h2><?php echo $forum['title']; ?></h2>
 					</div>
-					<div class="col-md-4">
-						<button class="btn btn-default pull-right">
+					<div class="col-md-2">
+						<button class="btn btn-info btn-100">
 							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Edit
+						</button>
+						<button class="btn btn-danger btn-100">
+							<i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Delete
 						</button>
 					</div>
 				</div>
@@ -35,7 +38,7 @@
 	</div>
 </div>
 
-<h1>Discussions</h1>
+<h2>Discussions</h2>
 
 <div class="row">
 	<div class="col-md-12">
