@@ -5,6 +5,9 @@ class AccountSettings extends CI_Controller {
 
 	public function __construct() {
         parent:: __construct();
+        if (empty($_SESSION['loggedIn'])) {
+        	header("Location: ". base_url(''));
+        }
     }
 
 	public function index()
@@ -16,7 +19,6 @@ class AccountSettings extends CI_Controller {
 		$data['pageDescription']="Manage Account Settings";
 		$data['activeNav']="accountNav";
 		$this->load->view('template/header',$data);
-		$this->load->view('pages/account/myForums',$data);
 		$this->load->view('template/footer');
 	}
 }

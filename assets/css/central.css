@@ -24,3 +24,24 @@ body{
 	text-align: center;
 	color:#b34040;
 }
+
+.dataTable > thead > tr > th{
+    text-align: center;
+    vertical-align: middle;
+}
+.dataTable > tbody > tr > td{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.center{
+	text-align: center;
+}
+
+.display-none{
+	display: none;
+}
+
+.bold{
+	font-weight: bold;
+}
