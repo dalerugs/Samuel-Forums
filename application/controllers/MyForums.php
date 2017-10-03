@@ -6,6 +6,7 @@ class MyForums extends CI_Controller {
 	public function __construct() {
         parent:: __construct();
         $this->load->model('forums_model','forumsModel');
+        $this->load->model('answers_model','answersModel');
         if (empty($_SESSION['loggedIn'])) {
         	header("Location: ". base_url(''));
         }
@@ -36,12 +37,27 @@ class MyForums extends CI_Controller {
 	public function forum($id){
 		$data=array();
 		$forum = $this->forumsModel->readForumById($id);
+		$data['editable']=TRUE;
+		if($forum['userId']!=$_SESSION['id']){
+			show_404();
+		}
 		$data['forum']=$forum;
+		$data['answers']=$this->answersModel->readAnswerByForumId($forum['id']);
 		$data['title']="Forums";
 		$data['loggedIn']=(empty($_SESSION['loggedIn']) ? FALSE : $_SESSION['loggedIn']);
 		$data['pageTitle']="M Y &nbsp; F O R U M S";
 		$data['pageDescription']=$forum['title'];
 		$data['activeNav']="accountNav";
+
+		if ($this->input->post("post")) {
+			$answer=array(
+				'userId' => $_SESSION['id'],
+				'forumId' => $id,
+				'answer' => $this->input->post("answer")
+			);
+			$this->answersModel->createAnswer($answer);
+			header("Location: ". base_url('myForums/forum/'.$id));
+		}
 
 		$this->load->view('template/header',$data);
 		$this->load->view('pages/forum',$data);
