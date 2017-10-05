@@ -7,6 +7,7 @@ class MyForums extends CI_Controller {
         parent:: __construct();
         $this->load->model('forums_model','forumsModel');
         $this->load->model('answers_model','answersModel');
+        $this->load->model('users_model','usersModel');
         if (empty($_SESSION['loggedIn'])) {
         	header("Location: ". base_url(''));
         }
@@ -15,7 +16,7 @@ class MyForums extends CI_Controller {
 	public function index()
 	{
 		$data=array();
-		$data['title']="Forums";
+		$data['title']="My Forums";
 		$data['loggedIn']=(empty($_SESSION['loggedIn']) ? FALSE : $_SESSION['loggedIn']);
 		$data['pageTitle']="M Y &nbsp; F O R U M S";
 		$data['pageDescription']="My Forums Management";
@@ -37,13 +38,27 @@ class MyForums extends CI_Controller {
 	public function forum($id){
 		$data=array();
 		$forum = $this->forumsModel->readForumById($id);
-		$data['editable']=TRUE;
 		if($forum['userId']!=$_SESSION['id']){
 			show_404();
 		}
+		$data['answers']=array();
+		$answers=$this->answersModel->readAnswerByForumId($forum['id']);
+		foreach ($answers as $answer) {
+			$user=$this->usersModel->readUserById($answer['userId']);
+			array_push($data['answers'],array(
+				'id' => $answer['id'],
+				'forumId' => $answer['forumId'],
+				'userId' => $answer['userId'],
+				'firstName' => $user['firstName'],
+				'lastName' => $user['lastName'],
+				'answer' => $answer['answer'],
+				'createdAt' => $answer['createdAt'],
+				'editable' => ($_SESSION['id']==$answer['userId']?TRUE:FALSE)
+			));
+		}
+		$data['editable']=($_SESSION['id']==$forum['userId']?TRUE:FALSE);
 		$data['forum']=$forum;
-		$data['answers']=$this->answersModel->readAnswerByForumId($forum['id']);
-		$data['title']="Forums";
+		$data['title']="My Forums";
 		$data['loggedIn']=(empty($_SESSION['loggedIn']) ? FALSE : $_SESSION['loggedIn']);
 		$data['pageTitle']="M Y &nbsp; F O R U M S";
 		$data['pageDescription']=$forum['title'];

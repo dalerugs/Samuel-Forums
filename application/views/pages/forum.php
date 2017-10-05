@@ -46,9 +46,26 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="panel panel-default">
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+					<label>
+						<?php echo $answer['firstName']." ".$answer['lastName']; ?>
+					</label>
+					<?php if($answer['editable']){ ?>
+					<button class="btn btn-danger pull-right btn-sm">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+					<button style="margin-right: 5px" class="btn btn-info pull-right btn-sm">
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					</button>
+					
+					<?php } ?>
+			</div>
 			<div class="panel-body">
-				
+				<?php echo $answer['answer']; ?>
+			</div>
+			<div class="panel-heading">
+				Date Posted: <?php echo $answer['createdAt']; ?>
 			</div>
 		</div>
 	</div>
@@ -58,7 +75,7 @@
 
 <div class="row margin-top-20">
 	<div class="col-md-12">
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h4>Post your answer</h4>
 			</div>

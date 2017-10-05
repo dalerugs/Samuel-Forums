@@ -27,7 +27,7 @@ class Answers_model extends CI_Model {
         $this->db->from('answers');
         $this->db->where("forumId='$forumId'");
         $this->db->order_by("createdAt", "asc");
-        $forums = $this->db->get()->result();
+        $forums = $this->db->get()->result_array();
         return $forums;
     }
     

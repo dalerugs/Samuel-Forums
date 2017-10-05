@@ -15,6 +15,10 @@ body{
 	margin-top: 20px;
 }
 
+.margin-bot-20{
+	margin-bottom: 20px;
+}
+
 .dropdown-menu-lg{
 	width: 300px !important;
 	padding: 20px
@@ -49,3 +53,11 @@ body{
 .btn-100{
 	width: 90px
 }
+
+.forum{
+	cursor: pointer;
+}
+
+.forum-title:hover{
+	text-decoration: underline;
+}	
