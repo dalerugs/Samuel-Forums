@@ -42,7 +42,10 @@
 
 <h2>Discussions</h2>
 
+<script type="text/javascript">var corpus = [];</script>
+
 <?php if (!empty($answers)){ foreach($answers as $answer) {?>
+<script type="text/javascript">corpus.push("<?php echo $answer['answer']; ?>");</script>
 
 <div class="row">
 	<div class="col-md-12">
@@ -92,3 +95,16 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	data = {'corpus':corpus};
+	$.ajax({
+        url: "http://192.168.1.8:8080/sample_input",
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        success:function(data) {
+          console.table(data.tokens);
+        }
+      });
+</script>

@@ -22,7 +22,6 @@ class MyForums extends CI_Controller {
 		$data['pageDescription']="My Forums Management";
 		$data['activeNav']="accountNav";
 		$data['css']=array(
-            'assets/css/tables.css',
             'assets/css/bootstrapValidator.css',
         );
         

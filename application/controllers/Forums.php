@@ -65,7 +65,7 @@ class Forums extends CI_Controller {
 		$data['loggedIn']=(empty($_SESSION['loggedIn']) ? FALSE : $_SESSION['loggedIn']);
 		$data['pageTitle']="F O R U M S";
 		$data['pageDescription']=$forum['title'];
-		$data['activeNav']="accountNav";
+		$data['activeNav']="forumsNav";
 
 		if ($this->input->post("post")) {
 			$answer=array(
