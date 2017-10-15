@@ -97,14 +97,17 @@
 </div>
 
 <script type="text/javascript">
-	data = {'corpus':corpus};
+	data = {
+		'corpus':corpus,
+		'summary_length':2
+	};
 	$.ajax({
-        url: "http://192.168.1.8:8080/sample_input",
+        url: "http://192.168.2.105:8080/samuel_api",
         type: 'POST',
         data: JSON.stringify(data),
         contentType:"application/json",
         success:function(data) {
-          console.table(data.tokens);
+          console.log(data);
         }
       });
 </script>
