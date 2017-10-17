@@ -122,9 +122,9 @@
         type: 'POST',
         data: JSON.stringify(data),
         contentType:"application/json",
-        success:function(data) {
-          console.log(data.summarized_text);
-          $("#Conclusion").text(data.summarized_text);
+        success:function(samuel) {
+          console.log(data);
+          $("#Conclusion").text(samuel.summarized_text);
         }
       });
 </script>
