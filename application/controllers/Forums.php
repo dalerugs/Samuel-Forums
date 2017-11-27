@@ -41,28 +41,40 @@ class Forums extends CI_Controller {
 	public function forum($id){
 		$data=array();
 		$forum = $this->forumsModel->readForumById($id);
-		if($forum['userId']!=$_SESSION['id']){
-			show_404();
-		}
+		// if($forum['userId']!=$_SESSION['id']){
+		// 	show_404();
+		// }
 		$data['answers']=array();
+		$data['loggedIn']=(empty($_SESSION['loggedIn']) ? FALSE : $_SESSION['loggedIn']);
 		$answers=$this->answersModel->readAnswerByForumId($forum['id']);
 		foreach ($answers as $answer) {
 			$user=$this->usersModel->readUserById($answer['userId']);
-			array_push($data['answers'],array(
+			$ans=array(
 				'id' => $answer['id'],
 				'forumId' => $answer['forumId'],
 				'userId' => $answer['userId'],
 				'firstName' => $user['firstName'],
 				'lastName' => $user['lastName'],
 				'answer' => $answer['answer'],
-				'createdAt' => $answer['createdAt'],
-				'editable' => ($_SESSION['id']==$answer['userId']?TRUE:FALSE)
-			));
+				'createdAt' => $answer['createdAt']
+			);
+			if($data['loggedIn']){
+				$ans['editable']=($_SESSION['id']==$forum['userId']?TRUE:FALSE);
+			}else{
+				$ans['editable']=FALSE;
+			}
+			array_push($data['answers'],$ans);
 		}
-		$data['editable']=($_SESSION['id']==$forum['userId']?TRUE:FALSE);
+		
+		if($data['loggedIn']){
+			$data['editable']=($_SESSION['id']==$forum['userId']?TRUE:FALSE);
+		}else{
+			$data['editable']=FALSE;
+		}
+		
 		$data['forum']=$forum;
 		$data['title']="Forums";
-		$data['loggedIn']=(empty($_SESSION['loggedIn']) ? FALSE : $_SESSION['loggedIn']);
+		
 		$data['pageTitle']="F O R U M S";
 		$data['pageDescription']=$forum['title'];
 		$data['activeNav']="forumsNav";

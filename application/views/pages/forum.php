@@ -21,6 +21,10 @@
 					<div class="col-md-12">
 						<table class="table margin-top-20">
 							<tr>
+								<td class="bold">Subject</td>
+								<td><?php echo $forum['subject']; ?></td>
+							</tr>
+							<tr>
 								<td class="bold">Description</td>
 								<td><?php echo $forum['description']; ?></td>
 							</tr>
@@ -76,6 +80,8 @@
 
 <?php  }} ?>
 
+<?php if($loggedIn){ ?>
+
 <div class="row margin-top-20">
 	<div class="col-md-12">
 		<div class="panel panel-primary">
@@ -96,10 +102,12 @@
 	</div>
 </div>
 
+<?php } ?>
+
 <script type="text/javascript">
 	data = {
 		'corpus':corpus,
-		'summary_length':2
+		'summary_length':3
 	};
 	$.ajax({
         url: "http://192.168.2.105:8080/samuel_api",
