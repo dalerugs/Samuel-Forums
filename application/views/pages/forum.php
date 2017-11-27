@@ -39,6 +39,22 @@
 						</table>
 					</div>
 				</div>
+				<div class="row margin-top">
+					<div class="col-md-8">
+						<h3>Conclusion</h3>
+						<p id="Conclusion">
+							
+						</p>
+					</div>
+				</div>
+				<div class="row margin-top">
+					<div class="col-md-8">
+						<!-- <h3>Polarity</h3> -->
+						<p style="font-size: 25px" id="Polarity">
+							
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -46,10 +62,10 @@
 
 <h2>Discussions</h2>
 
-<script type="text/javascript">var corpus = [];</script>
+<script type="text/javascript">var corpus = "";</script>
 
 <?php if (!empty($answers)){ foreach($answers as $answer) {?>
-<script type="text/javascript">corpus.push("<?php echo $answer['answer']; ?>");</script>
+<script type="text/javascript">corpus +=" <?php echo $answer['answer']; ?>";</script>
 
 <div class="row">
 	<div class="col-md-12">
@@ -110,12 +126,22 @@
 		'summary_length':3
 	};
 	$.ajax({
-        url: "http://192.168.2.105:8080/samuel_api",
+        url: "http://192.168.1.2:8080/samuel_api",
         type: 'POST',
         data: JSON.stringify(data),
         contentType:"application/json",
-        success:function(data) {
+        success:function(samuel) {
           console.log(data);
+          $("#Conclusion").text(samuel.summarized_text);
+          if (samuel.polarity=="pos") {
+          	$("#Polarity").html("<i class='fa fa-plus' aria-hidden='true'></i> &nbsp; Positive")
+          	$("#Polarity").addClass("text text-primary")
+          }
+          else if(samuel.polarity=="neg"){
+          	$("#Polarity").html("<i class='fa fa-minus' aria-hidden='true'></i> &nbsp; Negative")
+          	$("#Polarity").addClass("text text-danger")
+          }
+          
         }
       });
 </script>

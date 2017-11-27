@@ -41,9 +41,6 @@ class Forums extends CI_Controller {
 	public function forum($id){
 		$data=array();
 		$forum = $this->forumsModel->readForumById($id);
-		// if($forum['userId']!=$_SESSION['id']){
-		// 	show_404();
-		// }
 		$data['answers']=array();
 		$data['loggedIn']=(empty($_SESSION['loggedIn']) ? FALSE : $_SESSION['loggedIn']);
 		$answers=$this->answersModel->readAnswerByForumId($forum['id']);
