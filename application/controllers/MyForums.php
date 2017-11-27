@@ -86,6 +86,7 @@ class MyForums extends CI_Controller {
 			$forum = array(
 				'userId' => $_SESSION['id'],
 				'title' => $this->input->post('title'),
+				'subject' => $this->input->post('subject'),
 				'description' => $this->input->post('description')
 			);
 			$this->forumsModel->createForum($forum);

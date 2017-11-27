@@ -45,6 +45,10 @@
                 	<input name="title" type="text" placeholder="Enter Title" class="form-control" />
                 </div>
                 <div class="form-group">
+                	<label>Subject</label>
+                	<input name="subject" type="text" placeholder="Enter Subject" class="form-control" />
+                </div>
+                <div class="form-group">
                 	<label>Description</label>
                 	<textarea name="description" class="form-control" placeholder="Enter Description" rows="7"></textarea>
                 </div>
