@@ -126,7 +126,7 @@
 		'summary_length':3
 	};
 	$.ajax({
-        url: "http://192.168.1.2:8080/samuel_api",
+        url: "http://192.168.1.5:8080/samuel_api",
         type: 'POST',
         data: JSON.stringify(data),
         contentType:"application/json",
