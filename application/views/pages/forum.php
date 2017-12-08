@@ -60,6 +60,24 @@
 	</div>
 </div>
 
+<div class="row margin-top-20">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>Dashboard</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div id="dashboard" class="col-md-12">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <h2>Discussions</h2>
 
 <script type="text/javascript">var corpus = "";</script>
@@ -123,16 +141,19 @@
 <script type="text/javascript">
 	data = {
 		'corpus':corpus,
-		'summary_length':3
+		'summary_length':5,
+		'query':'<?php echo $forum['subject']; ?>',
+		'visualize':1
 	};
 	$.ajax({
-        url: "http://192.168.1.2:8080/samuel_api",
+        url: "http://192.168.2.106:63342/samuel_api",
         type: 'POST',
         data: JSON.stringify(data),
         contentType:"application/json",
         success:function(samuel) {
-          console.log(data);
+          console.log(samuel);
           $("#Conclusion").text(samuel.summarized_text);
+          $("#dashboard").html(samuel.dashboard);
           if (samuel.polarity=="pos") {
           	$("#Polarity").html("<i class='fa fa-plus' aria-hidden='true'></i> &nbsp; Positive")
           	$("#Polarity").addClass("text text-primary")

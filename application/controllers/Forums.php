@@ -56,7 +56,7 @@ class Forums extends CI_Controller {
 				'createdAt' => $answer['createdAt']
 			);
 			if($data['loggedIn']){
-				$ans['editable']=($_SESSION['id']==$forum['userId']?TRUE:FALSE);
+				$ans['editable']=($_SESSION['id']==$answer['userId']?TRUE:FALSE);
 			}else{
 				$ans['editable']=FALSE;
 			}
@@ -83,7 +83,7 @@ class Forums extends CI_Controller {
 				'answer' => $this->input->post("answer")
 			);
 			$this->answersModel->createAnswer($answer);
-			header("Location: ". base_url('myForums/forum/'.$id));
+			header("Location: ". base_url('Forums/forum/'.$id));
 		}
 
 		$this->load->view('template/header',$data);
