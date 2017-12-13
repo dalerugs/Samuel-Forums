@@ -143,10 +143,10 @@
 		'corpus':corpus,
 		'summary_length':5,
 		'query':'<?php echo $forum['subject']; ?>',
-		'visualize':1
+		'visualize': true
 	};
 	$.ajax({
-        url: "http://192.168.2.106:63342/samuel_api",
+        url: "http://192.168.1.5:63342/samuel_api",
         type: 'POST',
         data: JSON.stringify(data),
         contentType:"application/json",
@@ -154,13 +154,17 @@
           console.log(samuel);
           $("#Conclusion").text(samuel.summarized_text);
           $("#dashboard").html(samuel.dashboard);
-          if (samuel.polarity=="pos") {
-          	$("#Polarity").html("<i class='fa fa-plus' aria-hidden='true'></i> &nbsp; Positive")
-          	$("#Polarity").addClass("text text-primary")
+          if (samuel.polarity=="positive") {
+          	$("#Polarity").html("<i class='fa fa-smile-o' aria-hidden='true'></i> &nbsp; Positive")
+          	$("#Polarity").addClass("text text-success")
           }
-          else if(samuel.polarity=="neg"){
-          	$("#Polarity").html("<i class='fa fa-minus' aria-hidden='true'></i> &nbsp; Negative")
+          else if(samuel.polarity=="negative"){
+          	$("#Polarity").html("<i class='fa fa-frown-o' aria-hidden='true'></i> &nbsp; Negative")
           	$("#Polarity").addClass("text text-danger")
+          }
+          else{
+          	$("#Polarity").html("<i class='fa fa-meh-o' aria-hidden='true'></i> &nbsp; Neutral")
+          	$("#Polarity").addClass("text text-primary")
           }
           
         }
