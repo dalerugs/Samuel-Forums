@@ -139,34 +139,42 @@
 <?php } ?>
 
 <script type="text/javascript">
-	data = {
-		'corpus':corpus,
-		'summary_length':5,
-		'query':'<?php echo $forum['subject']; ?>',
-		'visualize': true
-	};
-	$.ajax({
-        url: "http://192.168.1.5:63342/samuel_api",
-        type: 'POST',
-        data: JSON.stringify(data),
-        contentType:"application/json",
-        success:function(samuel) {
-          console.log(samuel);
-          $("#Conclusion").text(samuel.summarized_text);
-          $("#dashboard").html(samuel.dashboard);
-          if (samuel.polarity=="positive") {
-          	$("#Polarity").html("<i class='fa fa-smile-o' aria-hidden='true'></i> &nbsp; Positive")
-          	$("#Polarity").addClass("text text-success")
-          }
-          else if(samuel.polarity=="negative"){
-          	$("#Polarity").html("<i class='fa fa-frown-o' aria-hidden='true'></i> &nbsp; Negative")
-          	$("#Polarity").addClass("text text-danger")
-          }
-          else{
-          	$("#Polarity").html("<i class='fa fa-meh-o' aria-hidden='true'></i> &nbsp; Neutral")
-          	$("#Polarity").addClass("text text-primary")
-          }
-          
-        }
-      });
+	var Samuel = [];
+	$.ajax("http://192.168.1.14:63342/samuel_init?KEY=YOUR_API_KEY", {
+      	success: function(data) {
+			Samuel = data;
+			data = {
+				'text':corpus,
+				'summary_length':5,
+				'visualize': true,
+				// 'query': '<?php echo $forum['subject']; ?>',
+				'KEY':Samuel.KEY
+			};
+			$.ajax({
+				url: "http://192.168.1.14:63342/samuel_api",
+				type: 'POST',
+				data: JSON.stringify(data),
+				contentType:"application/json",
+				success:function(samuel) {
+				console.log(samuel);
+				$("#Conclusion").text(samuel.summarized_text);
+				$("#dashboard").html(samuel.dashboard);
+				if (samuel.polarity=="positive") {
+					$("#Polarity").html("<i class='fa fa-smile-o' aria-hidden='true'></i> &nbsp; Positive")
+					$("#Polarity").addClass("text text-success")
+				}
+				else if(samuel.polarity=="negative"){
+					$("#Polarity").html("<i class='fa fa-frown-o' aria-hidden='true'></i> &nbsp; Negative")
+					$("#Polarity").addClass("text text-danger")
+				}
+				else{
+					$("#Polarity").html("<i class='fa fa-meh-o' aria-hidden='true'></i> &nbsp; Neutral")
+					$("#Polarity").addClass("text text-primary")
+				}
+				
+				}
+			});
+		}
+   	});
+	
 </script>
