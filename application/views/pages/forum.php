@@ -145,10 +145,11 @@
 			Samuel = data;
 			data = {
 				'text':corpus,
-				'summary_length':5,
+				'summary_length':8,
 				'visualize': true,
-				// 'query': '<?php echo $forum['subject']; ?>',
-				'KEY':Samuel.KEY
+				'query': '<?php echo $forum['subject']; ?>',
+				'KEY':Samuel.KEY,
+				'verbose': true
 			};
 			$.ajax({
 				url: "http://192.168.1.14:63342/samuel_api",
@@ -160,18 +161,17 @@
 				$("#Conclusion").text(samuel.summarized_text);
 				$("#dashboard").html(samuel.dashboard);
 				if (samuel.polarity=="positive") {
-					$("#Polarity").html("<i class='fa fa-smile-o' aria-hidden='true'></i> &nbsp; Positive")
+					$("#Polarity").html("<i class='fa fa-smile-o' aria-hidden='true'></i> &nbsp;"+samuel.percentage.final+" Positive")
 					$("#Polarity").addClass("text text-success")
 				}
 				else if(samuel.polarity=="negative"){
-					$("#Polarity").html("<i class='fa fa-frown-o' aria-hidden='true'></i> &nbsp; Negative")
+					$("#Polarity").html("<i class='fa fa-frown-o' aria-hidden='true'></i> &nbsp;"+samuel.percentage.final+" Negative")
 					$("#Polarity").addClass("text text-danger")
 				}
 				else{
-					$("#Polarity").html("<i class='fa fa-meh-o' aria-hidden='true'></i> &nbsp; Neutral")
+					$("#Polarity").html("<i class='fa fa-meh-o' aria-hidden='true'></i> &nbsp;"+samuel.percentage.final+" Neutral")
 					$("#Polarity").addClass("text text-primary")
 				}
-				
 				}
 			});
 		}
