@@ -139,42 +139,35 @@
 <?php } ?>
 
 <script type="text/javascript">
-	var Samuel = [];
-	$.ajax("http://192.168.1.14:63342/samuel_init?KEY=YOUR_API_KEY", {
-      	success: function(data) {
-			Samuel = data;
-			data = {
-				'text':corpus,
-				'summary_length':8,
-				'visualize': true,
-				'query': '<?php echo $forum['subject']; ?>',
-				'KEY':Samuel.KEY,
-				'verbose': true
-			};
-			$.ajax({
-				url: "http://192.168.1.14:63342/samuel_api",
-				type: 'POST',
-				data: JSON.stringify(data),
-				contentType:"application/json",
-				success:function(samuel) {
-				console.log(samuel);
-				$("#Conclusion").text(samuel.summarized_text);
-				$("#dashboard").html(samuel.dashboard);
-				if (samuel.polarity=="positive") {
-					$("#Polarity").html("<i class='fa fa-smile-o' aria-hidden='true'></i> &nbsp;"+samuel.percentage.final+" Positive")
-					$("#Polarity").addClass("text text-success")
-				}
-				else if(samuel.polarity=="negative"){
-					$("#Polarity").html("<i class='fa fa-frown-o' aria-hidden='true'></i> &nbsp;"+samuel.percentage.final+" Negative")
-					$("#Polarity").addClass("text text-danger")
-				}
-				else{
-					$("#Polarity").html("<i class='fa fa-meh-o' aria-hidden='true'></i> &nbsp;"+samuel.percentage.final+" Neutral")
-					$("#Polarity").addClass("text text-primary")
-				}
-				}
-			});
+	data = {
+		'text':corpus,
+		'summary_length':8,
+		'visualize': true,
+		'verbose': true,
+		'translate': true
+	};
+	$.ajax({
+		url: "http://192.168.1.14:63342/samuel_api?KEY=59FxFlXuh8nMuCPJ9qihmVVmyyroGvkpLPxdLne0",
+		type: 'POST',
+		data: JSON.stringify(data),
+		contentType:"application/json",
+		success:function(samuel) {
+		console.log(samuel);
+		$("#Conclusion").text(samuel.summarized_text);
+		$("#dashboard").html(samuel.dashboard);
+		if (samuel.polarity=="positive") {
+			$("#Polarity").html("<i class='fa fa-smile-o' aria-hidden='true'></i> &nbsp;"+samuel.percentage.positive+" Positive")
+			$("#Polarity").addClass("text text-success")
 		}
-   	});
+		else if(samuel.polarity=="negative"){
+			$("#Polarity").html("<i class='fa fa-frown-o' aria-hidden='true'></i> &nbsp;"+samuel.percentage.negative+" Negative")
+			$("#Polarity").addClass("text text-danger")
+		}
+		else{
+			$("#Polarity").html("<i class='fa fa-meh-o' aria-hidden='true'></i> &nbsp;"+samuel.percentage.neutral+" Neutral")
+			$("#Polarity").addClass("text text-primary")
+		}
+		}
+	});
 	
 </script>
